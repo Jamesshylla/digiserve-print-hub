@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { PageHero, Section } from "@/components/site/Section";
 import { galleryItems } from "@/data/gallery";
 import { whatsappLink } from "@/data/site";
+import { usePricingRealtime, useServicePrice } from "@/hooks/use-pricing";
 
 const title = "Products — Cards, Apparel, Mugs, Banners & Stamps | DIGISERVE SOLUTION";
 const description =
@@ -21,6 +22,9 @@ export const Route = createFileRoute("/products")({
 });
 
 function Products() {
+  usePricingRealtime();
+  const { priceFor } = useServicePrice();
+
   return (
     <>
       <PageHero
@@ -58,7 +62,7 @@ function Products() {
                       From
                     </span>
                     <span className="font-display text-lg font-extrabold neon-text">
-                      {item.from}
+                      {priceFor(item.serviceSlug)}
                     </span>
                   </span>
                   <a href={whatsappLink} target="_blank" rel="noreferrer" className="btn-neon">

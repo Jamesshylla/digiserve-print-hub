@@ -123,54 +123,6 @@ export const serviceGroups: ServiceGroup[] = [
   },
 ];
 
-export type PriceRow = { item: string; unit: string; price: string };
-export type PriceTable = { title: string; note?: string; rows: PriceRow[] };
-
-export const priceTables: PriceTable[] = [
-  {
-    title: "Documents & Copying",
-    note: "A4 70–100 GSM. Extra copies get slab discounts.",
-    rows: [
-      { item: "Black & White Print", unit: "per page", price: "₹3" },
-      { item: "Colour Print", unit: "per page", price: "₹10" },
-      { item: "Photocopy / Xerox", unit: "per page", price: "₹2" },
-      { item: "Document Scanning", unit: "per page", price: "₹5" },
-      { item: "Lamination (A4)", unit: "per sheet", price: "₹30" },
-      { item: "Spiral Binding", unit: "per book", price: "₹50" },
-    ],
-  },
-  {
-    title: "Photo & Frames",
-    rows: [
-      { item: "Passport Size Photo", unit: "8 copies", price: "₹80" },
-      { item: "Photo Print 4x6", unit: "per print", price: "₹25" },
-      { item: "Photo Frame A4", unit: "per frame", price: "₹350" },
-      { item: "Canvas Print 12x18", unit: "per piece", price: "₹950" },
-    ],
-  },
-  {
-    title: "Apparel & Gifts",
-    rows: [
-      { item: "T-Shirt Printing", unit: "per piece", price: "₹350" },
-      { item: "Sports Jersey", unit: "per piece", price: "₹450" },
-      { item: "Hoodie / Sweatshirt", unit: "per piece", price: "₹850" },
-      { item: "Ceramic Mug", unit: "per mug", price: "₹250" },
-      { item: "Magic Mug", unit: "per mug", price: "₹350" },
-    ],
-  },
-  {
-    title: "Branding & Stationery",
-    rows: [
-      { item: "Flex Banner", unit: "per sq. ft.", price: "₹18" },
-      { item: "Vinyl Printing", unit: "per sq. ft.", price: "₹35" },
-      { item: "Business Cards", unit: "per 100", price: "₹300" },
-      { item: "Wedding Cards", unit: "per 100", price: "₹1,200" },
-      { item: "Rubber Stamp", unit: "per stamp", price: "₹200" },
-      { item: "Self Ink Stamp", unit: "per stamp", price: "₹450" },
-    ],
-  },
-];
-
 export const faqs = [
   {
     q: "Do you deliver to my address?",

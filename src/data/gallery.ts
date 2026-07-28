@@ -12,7 +12,7 @@ export type GalleryItem = {
   category: string;
   image: string;
   alt: string;
-  from: string;
+  serviceSlug: string;
   includes: string[];
 };
 
@@ -23,7 +23,7 @@ export const galleryItems: GalleryItem[] = [
     category: "Photo",
     image: passport,
     alt: "Sample design mockup of a passport size photo sheet and printed ID card",
-    from: "₹80",
+    serviceSlug: "passport-photo",
     includes: ["35x45mm standard", "8 or 12 copies", "Instant ID card printing"],
   },
   {
@@ -32,7 +32,7 @@ export const galleryItems: GalleryItem[] = [
     category: "Stationery",
     image: cards,
     alt: "Sample design mockup of premium printed business cards",
-    from: "₹300 / 100",
+    serviceSlug: "business-cards",
     includes: ["300–350 GSM stock", "Matte, gloss or spot UV", "Free layout assistance"],
   },
   {
@@ -41,7 +41,7 @@ export const galleryItems: GalleryItem[] = [
     category: "Apparel",
     image: apparel,
     alt: "Sample design mockup of a custom printed t-shirt and hoodie",
-    from: "₹350",
+    serviceSlug: "tshirt-printing",
     includes: ["Team names & numbers", "DTF and vinyl transfer", "Bulk order discounts"],
   },
   {
@@ -50,7 +50,7 @@ export const galleryItems: GalleryItem[] = [
     category: "Gifts",
     image: mug,
     alt: "Sample design mockup of a custom photo mug and heat sensitive magic mug",
-    from: "₹250",
+    serviceSlug: "ceramic-mug",
     includes: ["Full wrap sublimation", "Heat reveal magic mugs", "Gift box available"],
   },
   {
@@ -59,7 +59,7 @@ export const galleryItems: GalleryItem[] = [
     category: "Photo",
     image: frame,
     alt: "Sample design mockup of a canvas print and framed photograph on a wall",
-    from: "₹350",
+    serviceSlug: "photo-frame-a4",
     includes: ["Gallery wrap canvas", "Wood & synthetic frames", "Custom sizes"],
   },
   {
@@ -68,7 +68,7 @@ export const galleryItems: GalleryItem[] = [
     category: "Large Format",
     image: banner,
     alt: "Sample design mockup of a large flex banner and roll-up standee",
-    from: "₹18 / sq. ft.",
+    serviceSlug: "flex-banner",
     includes: ["Weather resistant flex", "Standee & backdrop", "Eyelets and framing"],
   },
   {
@@ -77,7 +77,7 @@ export const galleryItems: GalleryItem[] = [
     category: "Office",
     image: stamp,
     alt: "Sample design mockup of a rubber stamp, self ink stamp and company seal",
-    from: "₹200",
+    serviceSlug: "rubber-stamp",
     includes: ["Laser engraved dies", "Self-ink & pre-ink", "Round company seals"],
   },
 ];

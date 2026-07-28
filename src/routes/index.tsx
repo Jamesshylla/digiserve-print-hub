@@ -13,6 +13,7 @@ import heroImage from "@/assets/hero-print.jpg";
 import { Section, SectionHeading } from "@/components/site/Section";
 import { business, mapsDirections, orderSteps, reviews, serviceGroups, stats, whatsappLink } from "@/data/site";
 import { galleryItems } from "@/data/gallery";
+import { usePricingRealtime, useServicePrice } from "@/hooks/use-pricing";
 
 const title = "DIGISERVE SOLUTION — Digital Print Shop in Ummulong, Meghalaya";
 const description =
@@ -31,6 +32,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  usePricingRealtime();
+  const { priceFor } = useServicePrice();
+
   return (
     <>
       <section className="relative overflow-hidden hero-surface">
@@ -169,7 +173,7 @@ function Home() {
                   <h3 className="mt-1 font-bold">{item.title}</h3>
                 </div>
                 <span className="shrink-0 font-display text-sm font-bold text-foreground">
-                  {item.from}
+                  {priceFor(item.serviceSlug)}
                 </span>
               </div>
             </article>

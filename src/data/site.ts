@@ -11,6 +11,14 @@ export const business = {
   pickupOnly: true,
 };
 
+/** UPI / Google Pay collection details shown on the payment page. */
+export const upi = {
+  // Replace with the exact UPI ID printed on your Google Pay QR.
+  id: "9366613857@okbizaxis",
+  payeeName: business.name,
+  qrImage: "https://i.ibb.co/cXV8YsVx/2e72324e-ee7a-489a-8c9b-c11b710e92b3.jpg",
+};
+
 export const mapsEmbed = `https://www.google.com/maps?q=${business.mapsQuery}&output=embed`;
 export const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${business.mapsQuery}`;
 export const whatsappLink = `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(

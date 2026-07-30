@@ -305,3 +305,18 @@
     background: oklch(0.84 0.16 196 / 30%);
   }
 }
+
+.input-line {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  background-color: oklch(from var(--color-background) l c h / 60%);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-foreground);
+}
+
+.input-line:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}

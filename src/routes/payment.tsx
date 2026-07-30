@@ -109,7 +109,7 @@ function Payment() {
           </div>
         )}
         <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
-          <div className={`glass animate-rise p-7 ${preset !== null ? "hidden lg:block" : ""}`}>
+          <div className={`glass animate-rise p-7 ${preset !== null ? "hidden" : ""}`}>
             <h2 className="text-xl font-bold">Order details</h2>
 
 

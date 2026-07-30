@@ -1,3 +1,5 @@
+import upiQr from "@/assets/upi-qr.jpg";
+
 export const business = {
   name: "DIGISERVE SOLUTION",
   tagline: "Digital Print Shop & Online Service Center",

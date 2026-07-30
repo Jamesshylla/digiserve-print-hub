@@ -204,15 +204,20 @@ function Payment() {
             </div>
 
             <dl className="mt-6 space-y-2 text-sm">
-              <Row label="Rate" value={`${formatInr(quote?.effectiveRate ?? 0)} × ${quote?.chargeableQty ?? 0}`} />
-              {quote?.tierLabel && <Row label="Bulk slab" value={quote.tierLabel} />}
-              <Row label="Subtotal" value={formatInr(quote?.subtotal ?? 0) ?? "₹0"} />
-              {(quote?.discount ?? 0) > 0 && (
-                <Row label="Discount" value={`− ${formatInr(quote?.discount ?? 0)}`} />
+              {preset === null && (
+                <>
+                  <Row label="Rate" value={`${formatInr(quote?.effectiveRate ?? 0)} × ${quote?.chargeableQty ?? 0}`} />
+                  {quote?.tierLabel && <Row label="Bulk slab" value={quote.tierLabel} />}
+                  <Row label="Subtotal" value={formatInr(quote?.subtotal ?? 0) ?? "₹0"} />
+                  {(quote?.discount ?? 0) > 0 && (
+                    <Row label="Discount" value={`− ${formatInr(quote?.discount ?? 0)}`} />
+                  )}
+                  {quote?.surchargeLines.map((l) => (
+                    <Row key={l.label} label={l.label} value={`+ ${formatInr(l.amount)}`} />
+                  ))}
+                </>
               )}
-              {quote?.surchargeLines.map((l) => (
-                <Row key={l.label} label={l.label} value={`+ ${formatInr(l.amount)}`} />
-              ))}
+
               <div className="flex items-center justify-between border-t border-border pt-3 text-base font-bold">
                 <span>Total payable</span>
                 <span className="font-display neon-text">{formatInr(amount)}</span>

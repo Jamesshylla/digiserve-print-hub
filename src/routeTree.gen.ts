@@ -26,6 +26,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedAdminPricingRouteImport } from './routes/_authenticated/admin/pricing'
+import { Route as AuthenticatedAdminDesignOrdersRouteImport } from './routes/_authenticated/admin/design-orders'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -112,6 +113,12 @@ const AuthenticatedAdminPricingRoute =
     path: '/admin/pricing',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminDesignOrdersRoute =
+  AuthenticatedAdminDesignOrdersRouteImport.update({
+    id: '/admin/design-orders',
+    path: '/admin/design-orders',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/admin/design-orders': typeof AuthenticatedAdminDesignOrdersRoute
   '/admin/pricing': typeof AuthenticatedAdminPricingRoute
 }
 export interface FileRoutesByTo {
@@ -147,6 +155,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/admin/design-orders': typeof AuthenticatedAdminDesignOrdersRoute
   '/admin/pricing': typeof AuthenticatedAdminPricingRoute
 }
 export interface FileRoutesById {
@@ -167,6 +176,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/_authenticated/admin/design-orders': typeof AuthenticatedAdminDesignOrdersRoute
   '/_authenticated/admin/pricing': typeof AuthenticatedAdminPricingRoute
 }
 export interface FileRouteTypes {
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/admin/design-orders'
     | '/admin/pricing'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -205,6 +216,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/admin/design-orders'
     | '/admin/pricing'
   id:
     | '__root__'
@@ -224,6 +236,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/_authenticated/admin/design-orders'
     | '/_authenticated/admin/pricing'
   fileRoutesById: FileRoutesById
 }
@@ -367,14 +380,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPricingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/design-orders': {
+      id: '/_authenticated/admin/design-orders'
+      path: '/admin/design-orders'
+      fullPath: '/admin/design-orders'
+      preLoaderRoute: typeof AuthenticatedAdminDesignOrdersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminDesignOrdersRoute: typeof AuthenticatedAdminDesignOrdersRoute
   AuthenticatedAdminPricingRoute: typeof AuthenticatedAdminPricingRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminDesignOrdersRoute: AuthenticatedAdminDesignOrdersRoute,
   AuthenticatedAdminPricingRoute: AuthenticatedAdminPricingRoute,
 }
 

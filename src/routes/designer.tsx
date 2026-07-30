@@ -362,7 +362,7 @@ function DesignerPage() {
             <div
               ref={editorRef}
               className="relative mt-4 aspect-square w-full overflow-hidden rounded-xl border border-border"
-              style={{ background: color }}
+              style={{ background: color, containerType: "inline-size" }}
             >
               <div className="pointer-events-none absolute inset-[18%] rounded-md border border-dashed border-foreground/30" />
               {layers.map((layer) => (

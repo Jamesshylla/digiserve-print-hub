@@ -17,7 +17,13 @@ const title = "Pay by UPI / GPay — Secure Order Payment | DIGISERVE SOLUTION";
 const description =
   "Pay your DIGISERVE SOLUTION print order instantly with Google Pay, PhonePe, Paytm or any UPI app. Bulk slab rates and coupon discounts are applied automatically before you pay.";
 
+type PaymentSearch = { order?: string; amount?: number };
+
 export const Route = createFileRoute("/payment")({
+  validateSearch: (search: Record<string, unknown>): PaymentSearch => ({
+    order: typeof search.order === "string" ? search.order : undefined,
+    amount: Number(search.amount) > 0 ? Number(search.amount) : undefined,
+  }),
   head: () => ({
     meta: [
       { title },
@@ -31,9 +37,11 @@ export const Route = createFileRoute("/payment")({
   component: Payment,
 });
 
+
 type Status = "pending" | "paid" | "failed";
 
 function Payment() {
+  const search = Route.useSearch();
   usePricingRealtime();
   const { data: services = [] } = useServices();
   const { data: tiers = [] } = useBulkTiers();
@@ -44,11 +52,13 @@ function Payment() {
     (s) => s.price_type !== "contact" && s.price_visibility === "show" && s.base_price,
   );
 
+  const preset = search.amount ?? null;
+
   const [serviceId, setServiceId] = useState("");
   const [qty, setQty] = useState(1);
   const [coupon, setCoupon] = useState("");
   const [codes, setCodes] = useState<string[]>([]);
-  const [orderId, setOrderId] = useState(() => generateOrderId());
+  const [orderId, setOrderId] = useState(() => search.order ?? generateOrderId());
   const [status, setStatus] = useState<Status>("pending");
   const [reference, setReference] = useState("");
 
@@ -67,13 +77,14 @@ function Payment() {
     });
   }, [service, qty, tiers, offers, surcharges, codes, coupon]);
 
-  const amount = quote?.total ?? 0;
+  const amount = preset ?? quote?.total ?? 0;
   const payLink = upiPayLink({
     upiId: upi.id,
     payeeName: upi.payeeName,
     amount,
     orderId,
   });
+
 
   const confirmLink = `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(
     `Payment for order ${orderId}\nService: ${service?.name ?? "-"}\nQty: ${qty}\nAmount: ₹${amount.toFixed(2)}\nUPI reference: ${reference || "(paste here)"}`,
@@ -88,9 +99,19 @@ function Payment() {
       />
 
       <Section>
+        {preset !== null && (
+          <div className="glass mb-6 p-5 text-sm">
+            <p className="font-semibold text-primary">Custom design order {orderId}</p>
+            <p className="mt-1 text-muted-foreground">
+              Your 3D design has been saved. The amount below is locked to your design quote — just
+              pay and send us the reference.
+            </p>
+          </div>
+        )}
         <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
-          <div className="glass animate-rise p-7">
+          <div className={`glass animate-rise p-7 ${preset !== null ? "hidden" : ""}`}>
             <h2 className="text-xl font-bold">Order details</h2>
+
 
             <label className="mt-6 block text-sm font-semibold" htmlFor="pay-service">
               Service
@@ -183,15 +204,20 @@ function Payment() {
             </div>
 
             <dl className="mt-6 space-y-2 text-sm">
-              <Row label="Rate" value={`${formatInr(quote?.effectiveRate ?? 0)} × ${quote?.chargeableQty ?? 0}`} />
-              {quote?.tierLabel && <Row label="Bulk slab" value={quote.tierLabel} />}
-              <Row label="Subtotal" value={formatInr(quote?.subtotal ?? 0) ?? "₹0"} />
-              {(quote?.discount ?? 0) > 0 && (
-                <Row label="Discount" value={`− ${formatInr(quote?.discount ?? 0)}`} />
+              {preset === null && (
+                <>
+                  <Row label="Rate" value={`${formatInr(quote?.effectiveRate ?? 0)} × ${quote?.chargeableQty ?? 0}`} />
+                  {quote?.tierLabel && <Row label="Bulk slab" value={quote.tierLabel} />}
+                  <Row label="Subtotal" value={formatInr(quote?.subtotal ?? 0) ?? "₹0"} />
+                  {(quote?.discount ?? 0) > 0 && (
+                    <Row label="Discount" value={`− ${formatInr(quote?.discount ?? 0)}`} />
+                  )}
+                  {quote?.surchargeLines.map((l) => (
+                    <Row key={l.label} label={l.label} value={`+ ${formatInr(l.amount)}`} />
+                  ))}
+                </>
               )}
-              {quote?.surchargeLines.map((l) => (
-                <Row key={l.label} label={l.label} value={`+ ${formatInr(l.amount)}`} />
-              ))}
+
               <div className="flex items-center justify-between border-t border-border pt-3 text-base font-bold">
                 <span>Total payable</span>
                 <span className="font-display neon-text">{formatInr(amount)}</span>

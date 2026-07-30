@@ -317,6 +317,69 @@ export type Database = {
         }
         Relationships: []
       }
+      t_shirt_orders: {
+        Row: {
+          amount: number
+          back_preview_path: string | null
+          coupon_code: string | null
+          created_at: string
+          customer_name: string
+          customer_phone: string
+          design: Json
+          front_preview_path: string | null
+          garment_color: string
+          garment_name: string
+          garment_slug: string
+          id: string
+          notes: string | null
+          order_code: string
+          quantity: number
+          size: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          back_preview_path?: string | null
+          coupon_code?: string | null
+          created_at?: string
+          customer_name: string
+          customer_phone: string
+          design?: Json
+          front_preview_path?: string | null
+          garment_color?: string
+          garment_name: string
+          garment_slug: string
+          id?: string
+          notes?: string | null
+          order_code: string
+          quantity?: number
+          size?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          back_preview_path?: string | null
+          coupon_code?: string | null
+          created_at?: string
+          customer_name?: string
+          customer_phone?: string
+          design?: Json
+          front_preview_path?: string | null
+          garment_color?: string
+          garment_name?: string
+          garment_slug?: string
+          id?: string
+          notes?: string | null
+          order_code?: string
+          quantity?: number
+          size?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

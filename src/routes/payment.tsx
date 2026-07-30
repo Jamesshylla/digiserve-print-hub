@@ -41,6 +41,7 @@ export const Route = createFileRoute("/payment")({
 type Status = "pending" | "paid" | "failed";
 
 function Payment() {
+  const search = Route.useSearch();
   usePricingRealtime();
   const { data: services = [] } = useServices();
   const { data: tiers = [] } = useBulkTiers();
@@ -51,11 +52,13 @@ function Payment() {
     (s) => s.price_type !== "contact" && s.price_visibility === "show" && s.base_price,
   );
 
+  const preset = search.amount ?? null;
+
   const [serviceId, setServiceId] = useState("");
   const [qty, setQty] = useState(1);
   const [coupon, setCoupon] = useState("");
   const [codes, setCodes] = useState<string[]>([]);
-  const [orderId, setOrderId] = useState(() => generateOrderId());
+  const [orderId, setOrderId] = useState(() => search.order ?? generateOrderId());
   const [status, setStatus] = useState<Status>("pending");
   const [reference, setReference] = useState("");
 
@@ -74,13 +77,14 @@ function Payment() {
     });
   }, [service, qty, tiers, offers, surcharges, codes, coupon]);
 
-  const amount = quote?.total ?? 0;
+  const amount = preset ?? quote?.total ?? 0;
   const payLink = upiPayLink({
     upiId: upi.id,
     payeeName: upi.payeeName,
     amount,
     orderId,
   });
+
 
   const confirmLink = `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(
     `Payment for order ${orderId}\nService: ${service?.name ?? "-"}\nQty: ${qty}\nAmount: ₹${amount.toFixed(2)}\nUPI reference: ${reference || "(paste here)"}`,

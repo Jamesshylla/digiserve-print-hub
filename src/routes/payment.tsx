@@ -17,7 +17,13 @@ const title = "Pay by UPI / GPay — Secure Order Payment | DIGISERVE SOLUTION";
 const description =
   "Pay your DIGISERVE SOLUTION print order instantly with Google Pay, PhonePe, Paytm or any UPI app. Bulk slab rates and coupon discounts are applied automatically before you pay.";
 
+type PaymentSearch = { order?: string; amount?: number };
+
 export const Route = createFileRoute("/payment")({
+  validateSearch: (search: Record<string, unknown>): PaymentSearch => ({
+    order: typeof search.order === "string" ? search.order : undefined,
+    amount: Number(search.amount) > 0 ? Number(search.amount) : undefined,
+  }),
   head: () => ({
     meta: [
       { title },
@@ -30,6 +36,7 @@ export const Route = createFileRoute("/payment")({
   }),
   component: Payment,
 });
+
 
 type Status = "pending" | "paid" | "failed";
 

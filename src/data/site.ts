@@ -1,5 +1,3 @@
-import upiQr from "@/assets/upi-qr.jpg";
-
 export const business = {
   name: "DIGISERVE SOLUTION",
   tagline: "Digital Print Shop & Online Service Center",
@@ -17,7 +15,7 @@ export const business = {
 export const upi = {
   id: "jamesshylla01-1@oksbi",
   payeeName: "JAMES SHYLLA",
-  qrImage: upiQr,
+  qrImage: "/__l5e/assets-v1/e6b5995a-2e5c-4ff9-b430-0c469b934618/upi-qr.jpg",
 };
 
 

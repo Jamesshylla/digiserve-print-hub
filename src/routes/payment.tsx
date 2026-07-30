@@ -99,9 +99,19 @@ function Payment() {
       />
 
       <Section>
+        {preset !== null && (
+          <div className="glass mb-6 p-5 text-sm">
+            <p className="font-semibold text-primary">Custom design order {orderId}</p>
+            <p className="mt-1 text-muted-foreground">
+              Your 3D design has been saved. The amount below is locked to your design quote — just
+              pay and send us the reference.
+            </p>
+          </div>
+        )}
         <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
-          <div className="glass animate-rise p-7">
+          <div className={`glass animate-rise p-7 ${preset !== null ? "hidden lg:block" : ""}`}>
             <h2 className="text-xl font-bold">Order details</h2>
+
 
             <label className="mt-6 block text-sm font-semibold" htmlFor="pay-service">
               Service

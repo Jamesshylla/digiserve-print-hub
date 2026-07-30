@@ -19,6 +19,7 @@ import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as DesignerRouteImport } from './routes/designer'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutRouteImport } from './routes/about'
@@ -76,6 +77,11 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DesignerRoute = DesignerRouteImport.update({
+  id: '/designer',
+  path: '/designer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/designer': typeof DesignerRoute
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/payment': typeof PaymentRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/designer': typeof DesignerRoute
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/payment': typeof PaymentRoute
@@ -148,6 +156,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/designer': typeof DesignerRoute
   '/faq': typeof FaqRoute
   '/gallery': typeof GalleryRoute
   '/payment': typeof PaymentRoute
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/contact'
+    | '/designer'
     | '/faq'
     | '/gallery'
     | '/payment'
@@ -184,6 +194,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/contact'
+    | '/designer'
     | '/faq'
     | '/gallery'
     | '/payment'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/contact'
+    | '/designer'
     | '/faq'
     | '/gallery'
     | '/payment'
@@ -221,6 +233,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
+  DesignerRoute: typeof DesignerRoute
   FaqRoute: typeof FaqRoute
   GalleryRoute: typeof GalleryRoute
   PaymentRoute: typeof PaymentRoute
@@ -305,6 +318,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/designer': {
+      id: '/designer'
+      path: '/designer'
+      fullPath: '/designer'
+      preLoaderRoute: typeof DesignerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -367,6 +387,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
+  DesignerRoute: DesignerRoute,
   FaqRoute: FaqRoute,
   GalleryRoute: GalleryRoute,
   PaymentRoute: PaymentRoute,

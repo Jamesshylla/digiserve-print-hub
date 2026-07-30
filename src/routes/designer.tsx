@@ -222,7 +222,7 @@ function DesignerPage() {
         const path = `${orderCode}/${key}-preview.png`;
         const { error } = await supabase.storage.from("design-uploads").upload(path, blob, {
           contentType: "image/png",
-          upsert: true,
+          upsert: false,
         });
         if (error) throw error;
         paths[key] = path;
@@ -233,7 +233,7 @@ function DesignerPage() {
         if (!inUse) continue;
         await supabase.storage
           .from("design-uploads")
-          .upload(`${orderCode}/artwork-${id}-${file.name}`, file, { upsert: true });
+          .upload(`${orderCode}/artwork-${id}-${file.name}`, file, { upsert: false });
       }
 
       const stripped: DesignState = {
